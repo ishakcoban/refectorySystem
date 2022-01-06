@@ -1,0 +1,53 @@
+* {
+	 margin: 0;
+}
+ form {
+	 display: grid;
+	 place-content: center;
+	 height: 100vh;
+}
+ #check {
+	 position: absolute;
+	 right: 100vw;
+}
+ #check + label {
+	 --i: var(--check, 1);
+	 --j: calc(1 - var(--i));
+	 position: relative;
+	 width: 6.25em;
+	 height: 6.25em;
+	 box-shadow: inset 0 0 0 4px #5ca8ff;
+	 font: 700 2em/ 6.25em segoe script, cursive;
+	 color: #fff;
+	 text-align: center;
+	 text-transform: capitalize;
+	 --rect: inset(calc(var(--i)*.5px));
+	 -webkit-clip-path: var(--rect);
+	 clip-path: var(--rect);
+	 mix-blend-mode: var(--check, screen);
+	 cursor: pointer;
+	 transition: 0.35s;
+}
+ #check + label:before, #check + label:after {
+	 position: absolute;
+	 top: 0;
+	 bottom: 0;
+	 right: 0;
+	 left: 0;
+	 opacity: var(--i);
+	 background: #5ca8ff;
+	 transition: inherit;
+	 content: '';
+}
+ #check + label:after {
+	 left: 17.5%;
+	 background: linear-gradient(90deg, #000 50%, transparent 0) calc(var(--j)*100%)/ 200%;
+	 --poly: polygon(0 30%, 35% 60%, 100% 0, 100% 25%, 35% 85%, 0 55%);
+	 -webkit-clip-path: var(--poly);
+	 clip-path: var(--poly);
+	 transition: opacity 0.35s, background-position 0.7s 0.35s;
+}
+ #check:not(:checked) + label {
+	 --i: 0;
+}
+ 
